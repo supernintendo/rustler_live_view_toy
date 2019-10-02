@@ -1,0 +1,84 @@
+// Chromatic Abberation
+$chromaticAbberationFrames: (
+  ("0%", 2.75px),
+  ("25%", 2.75px),
+  ("30%", 0.25px),
+  ("35%", 2.75px),
+  ("42%", 0.25px),
+  ("43%", 2.75px),
+  ("50%", 4.25px),
+  ("65%", 2.75px),
+  ("72%", 0.25px),
+  ("73%", 2.75px),
+  ("90%", 2.75px),
+  ("100%", 2.75px)
+);
+$chromaticAbberationBlue: rgba(47, 41, 255, 0.5);
+$chromaticAbberationRed: rgba(255, 41, 47, 0.5);
+
+@keyframes chromaticAbberation {
+  @each $frame in $chromaticAbberationFrames {
+    $position: nth($frame, 1);
+    $offset: nth($frame, 2);
+
+    #{$position} {
+      text-shadow: #{$offset} 0 1px $chromaticAbberationBlue,
+        #{$offset * -1} 0 1px $chromaticAbberationRed, 0 0 3px;
+    }
+  }
+}
+
+// CRT
+$border-radius: 64px;
+
+body.crt {
+  animation: chromaticAbberation 3s infinite;
+  border-radius: $border-radius;
+  box-shadow: 0px 0px #{$border-radius / 2} #222222;
+  transform-origin: 0 0;
+
+  main.container[role="main"] {
+    > div {
+      border-radius: $border-radius;
+      overflow: hidden;
+    }
+  }
+
+  &::before {
+    content: " ";
+    background: linear-gradient(rgba(19, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+      linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.02),
+        rgba(0, 255, 0, 0.06),
+        rgba(0, 0, 255, 0.02)
+      );
+    background-size: 100% 2px, 3px 100%;
+    border-radius: $border-radius;
+    display: block;
+    height: 100vh;
+    pointer-events: none;
+    position: fixed;
+    transform: translate(0, 0); // Fix for ghost lines
+    width: 100vw;
+    z-index: 10000;
+  }
+  &::after {
+    content: " ";
+    background: rgba(18, 16, 16, 0.05);
+    bottom: 0;
+    display: block;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10000;
+  }
+  .phx-disconnected {
+    &::before {
+      border-radius: $border-radius;
+    }
+  }
+}

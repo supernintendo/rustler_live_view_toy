@@ -1,0 +1,44 @@
+$scaleDelta: 0.25;
+$stageHeight: 560px;
+$stageWidth: 792px;
+
+$normalScale: 1;
+
+html body {
+  div.level {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    overflow: hidden;
+    div.stage {
+      background: #f2f2f2;
+      border: 1px solid black;
+      height: $stageHeight;
+      position: absolute;
+      overflow: hidden;
+      width: $stageWidth;
+      z-index: 3;
+      span.avatar {
+        background-origin: content-box;
+        background-position: left top;
+        position: absolute;
+        z-index: 3;
+        span.message {
+          bottom: 24px;
+          position: relative;
+          right: 32px;
+        }
+      }
+      @media only screen and (max-width: 1000px) {
+        transform: scale($normalScale * 0.75);
+      }
+      @media only screen and (max-width: 720px) {
+        transform: scale($normalScale * 0.5);
+      }
+      @media only screen and (max-width: 420px) {
+        transform: scale($normalScale * 0.25);
+      }
+    }
+  }
+}

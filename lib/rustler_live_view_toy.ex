@@ -1,0 +1,2 @@
+defmodule RustlerLiveViewToy do
+end
